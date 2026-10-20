@@ -1,8 +1,8 @@
 # Knowledge & Task Assistant
 
 The first increment of a production-oriented assistant backend. It provides a
-small task API backed by process-local memory. Data is intentionally reset when
-the server restarts; PostgreSQL can replace the repository in a later increment.
+small task API backed by process-local memory by default. PostgreSQL is available
+through the injectable `PostgresTaskRepository`.
 
 ## Requirements
 
@@ -24,6 +24,14 @@ Open `http://127.0.0.1:8000/docs` for the generated interactive API docs.
 ```bash
 pytest
 ```
+
+PostgreSQL integration tests run when `TEST_DATABASE_URL` points to a test
+database. They create a unique schema for each test and remove only that schema
+afterward. Set `TASK_STORAGE=postgres` to use PostgreSQL in the application;
+omit it or set `TASK_STORAGE=memory` for in-memory storage. An explicit
+`create_app(repository)` argument takes priority. The PostgreSQL repository
+accepts a connection string directly, or reads `DATABASE_URL` or Psycopg's
+`PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER`, and `PGPASSWORD` environment variables.
 
 ## API
 
@@ -52,7 +60,7 @@ least one non-null supported field.
 ```text
 app/
   main.py        # Application factory and HTTP routes
-  repository.py  # In-memory persistence operations
+  repository.py  # In-memory and PostgreSQL persistence operations
   schemas.py     # Pydantic request and response models
 tests/
   test_api.py    # Isolated endpoint tests

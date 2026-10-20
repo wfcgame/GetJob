@@ -1,15 +1,27 @@
+import os
 from uuid import UUID
 
 from fastapi import Depends, FastAPI, HTTPException, status
 
 from app.interfaces import TaskRepository
-from app.repository import InMemoryTaskRepository
+from app.repository import InMemoryTaskRepository, PostgresTaskRepository
 from app.schemas import Task, TaskCreate, TaskUpdate
 
 
 def create_app(repository: TaskRepository | None = None) -> FastAPI:
     app = FastAPI(title="Knowledge & Task Assistant", version="0.1.0")
-    task_repository = repository or InMemoryTaskRepository()
+    if repository is not None:
+        task_repository = repository
+    else:
+        storage = os.environ.get("TASK_STORAGE", "memory")
+        if storage == "memory":
+            task_repository = InMemoryTaskRepository()
+        elif storage == "postgres":
+            task_repository = PostgresTaskRepository()
+        else:
+            raise ValueError(
+                f"Invalid TASK_STORAGE value {storage!r}; expected 'memory' or 'postgres'"
+            )
 
     def get_repository() -> TaskRepository:
         return task_repository
@@ -51,6 +63,14 @@ def create_app(repository: TaskRepository | None = None) -> FastAPI:
         if task is None:
             raise HTTPException(status_code=404, detail="Task not found")
         return task
+
+    @app.delete("/tasks/{task_id}", status_code=status.HTTP_204_NO_CONTENT)
+    def delete_task(
+        task_id: UUID,
+        repo: TaskRepository = RepositoryDependency,
+    ) -> None:
+        if not repo.delete(task_id):
+            raise HTTPException(status_code=404, detail="Task not found")
 
     return app
 

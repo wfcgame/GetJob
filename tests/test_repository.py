@@ -74,6 +74,21 @@ def test_update_missing_task_returns_none() -> None:
     assert repository.list() == []
 
 
+def test_delete_existing_task_returns_true_and_removes_task() -> None:
+    repository = InMemoryTaskRepository()
+    task = repository.create(TaskCreate(name="Write project brief"))
+
+    assert repository.delete(task.id) is True
+    assert repository.get(task.id) is None
+    assert repository.list() == []
+
+
+def test_delete_missing_task_returns_false() -> None:
+    repository = InMemoryTaskRepository()
+
+    assert repository.delete(uuid4()) is False
+
+
 def test_repositories_have_independent_state() -> None:
     first = InMemoryTaskRepository()
     second = InMemoryTaskRepository()

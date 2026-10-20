@@ -166,6 +166,23 @@ def test_update_invalid_uuid_returns_422(client: TestClient) -> None:
     assert response.status_code == 422
 
 
+def test_delete_task(client: TestClient) -> None:
+    created = create_task(client)
+
+    response = client.delete(f"/tasks/{created['id']}")
+
+    assert response.status_code == 204
+    assert response.content == b""
+    assert client.get(f"/tasks/{created['id']}").status_code == 404
+
+
+def test_delete_missing_task_returns_404(client: TestClient) -> None:
+    response = client.delete(f"/tasks/{uuid4()}")
+
+    assert response.status_code == 404
+    assert response.json() == {"detail": "Task not found"}
+
+
 @pytest.mark.parametrize(
     "payload",
     [
