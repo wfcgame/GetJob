@@ -9,8 +9,10 @@ description = "First increment of an AI knowledge and task assistant"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "alembic>=1.15,<2.0",
     "fastapi>=0.115,<1.0",
     "psycopg[binary]>=3.2,<4.0",
+    "SQLAlchemy>=2.0,<3.0",
     "uvicorn[standard]>=0.32,<1.0",
 ]
 

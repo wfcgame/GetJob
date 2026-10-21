@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from uuid import UUID, uuid4
 import os
 
@@ -16,7 +17,12 @@ class InMemoryTaskRepository:
         return list(self._tasks.values())
 
     def create(self, task_create: TaskCreate) -> Task:
-        task = Task(id=uuid4(), name=task_create.name, completed=False)
+        task = Task(
+            id=uuid4(),
+            name=task_create.name,
+            completed=False,
+            created_at=datetime.now(timezone.utc),
+        )
         self._tasks[task.id] = task
         return task
 
@@ -59,7 +65,7 @@ class PostgresTaskRepository:
     def list(self) -> list[Task]:
         with self._connect() as connection:
             rows = connection.execute(
-                "SELECT id, name, completed FROM tasks ORDER BY id"
+                "SELECT id, name, completed, created_at FROM tasks ORDER BY id"
             ).fetchall()
             return [self._task(row) for row in rows]
 
@@ -67,7 +73,7 @@ class PostgresTaskRepository:
         with self._connect() as connection:
             row = connection.execute(
                 "INSERT INTO tasks (id, name, completed) VALUES (%s, %s, FALSE) "
-                "RETURNING id, name, completed",
+                "RETURNING id, name, completed, created_at",
                 (uuid4(), task_create.name),
             ).fetchone()
             return self._task(row)
@@ -75,7 +81,7 @@ class PostgresTaskRepository:
     def get(self, task_id: UUID) -> Task | None:
         with self._connect() as connection:
             row = connection.execute(
-                "SELECT id, name, completed FROM tasks WHERE id = %s",
+                "SELECT id, name, completed, created_at FROM tasks WHERE id = %s",
                 (task_id,),
             ).fetchone()
             return self._task(row) if row else None
@@ -89,7 +95,7 @@ class PostgresTaskRepository:
         with self._connect() as connection:
             row = connection.execute(
                 f"UPDATE tasks SET {assignments} WHERE id = %s "
-                "RETURNING id, name, completed",
+                "RETURNING id, name, completed, created_at",
                 (*changes.values(), task_id),
             ).fetchone()
             return self._task(row) if row else None

@@ -1,4 +1,5 @@
 from uuid import UUID, uuid4
+from datetime import timezone
 
 from app.repository import InMemoryTaskRepository
 from app.schemas import TaskCreate, TaskUpdate
@@ -17,6 +18,7 @@ def test_create_generates_uuid_and_stores_task() -> None:
 
     assert isinstance(task.id, UUID)
     assert task.name == "Write project brief"
+    assert task.created_at.tzinfo is timezone.utc
     assert repository.list() == [task]
 
 
@@ -51,6 +53,7 @@ def test_update_can_change_name() -> None:
     assert updated.id == task.id
     assert updated.name == "Review project brief"
     assert updated.completed is False
+    assert updated.created_at == task.created_at
     assert repository.get(task.id) == updated
 
 
@@ -64,6 +67,7 @@ def test_update_can_change_completed() -> None:
     assert updated.id == task.id
     assert updated.name == task.name
     assert updated.completed is True
+    assert updated.created_at == task.created_at
     assert repository.get(task.id) == updated
 
 

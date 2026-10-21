@@ -1,4 +1,5 @@
 from collections.abc import Iterator
+from datetime import datetime, timezone
 from uuid import UUID, uuid4
 
 import pytest
@@ -40,7 +41,11 @@ def client() -> Iterator[TestClient]:
 def create_task(client: TestClient, name: str = "Write project brief") -> dict:
     response = client.post("/tasks", json={"name": name})
     assert response.status_code == 201
-    return response.json()
+    task = response.json()
+    created_at = datetime.fromisoformat(task["created_at"])
+    assert created_at.tzinfo is not None
+    assert created_at.utcoffset() is not None
+    return task
 
 
 def test_health(client: TestClient) -> None:
@@ -79,7 +84,12 @@ def test_get_missing_task_returns_404(client: TestClient) -> None:
 
 
 def test_get_task_uses_injected_repository() -> None:
-    task = Task(id=uuid4(), name="Task from fake", completed=True)
+    task = Task(
+        id=uuid4(),
+        name="Task from fake",
+        completed=True,
+        created_at=datetime.now(timezone.utc),
+    )
     fake_repository = FakeTaskRepository(get_result=task)
 
     with TestClient(create_app(fake_repository)) as client:
@@ -125,6 +135,7 @@ def test_update_task(
     assert response.status_code == 200
     assert response.json()["name"] == expected_name
     assert response.json()["completed"] is expected_completed
+    assert response.json()["created_at"] == created["created_at"]
 
 
 @pytest.mark.parametrize("patch", [{}, {"name": None}, {"completed": None}])

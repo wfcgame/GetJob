@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, model_validator
 
 
 class TaskCreate(BaseModel):
@@ -28,4 +28,5 @@ class Task(BaseModel):
     id: UUID
     name: str
     completed: bool
+    created_at: AwareDatetime
 

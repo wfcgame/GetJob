@@ -1,6 +1,7 @@
 """Run with TEST_DATABASE_URL set to a disposable PostgreSQL database."""
 
 import os
+from datetime import datetime
 from uuid import UUID, uuid4
 
 import pytest
@@ -23,7 +24,8 @@ def repository() -> PostgresTaskRepository:
         connection.execute(
             f'CREATE TABLE "{schema}".tasks ('
             "id UUID PRIMARY KEY, name VARCHAR(200) NOT NULL, "
-            "completed BOOLEAN NOT NULL DEFAULT FALSE)"
+            "completed BOOLEAN NOT NULL DEFAULT FALSE, "
+            "created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP)"
         )
 
     scoped_url = make_conninfo(database_url, options=f"-csearch_path={schema}")
@@ -40,6 +42,9 @@ def test_postgres_crud_and_partial_updates(repository: PostgresTaskRepository) -
     task = repository.create(TaskCreate(name="First"))
     assert isinstance(task.id, UUID)
     assert task.completed is False
+    assert isinstance(task.created_at, datetime)
+    assert task.created_at.tzinfo is not None
+    assert task.created_at.utcoffset() is not None
     assert repository.get(task.id) == task
     assert repository.list() == [task]
 
@@ -47,11 +52,13 @@ def test_postgres_crud_and_partial_updates(repository: PostgresTaskRepository) -
     assert renamed.id == task.id
     assert renamed.name == "Second"
     assert renamed.completed is False
+    assert renamed.created_at == task.created_at
 
     completed = repository.update(task.id, TaskUpdate(completed=True))
     assert completed.id == task.id
     assert completed.name == "Second"
     assert completed.completed is True
+    assert completed.created_at == task.created_at
     assert repository.get(task.id) == completed
 
     assert repository.delete(task.id) is True

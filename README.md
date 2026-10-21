@@ -33,6 +33,31 @@ omit it or set `TASK_STORAGE=memory` for in-memory storage. An explicit
 accepts a connection string directly, or reads `DATABASE_URL` or Psycopg's
 `PGHOST`, `PGPORT`, `PGDATABASE`, `PGUSER`, and `PGPASSWORD` environment variables.
 
+## Database migrations
+
+Alembic manages the PostgreSQL schema. Repository reads and writes still use
+Psycopg 3 directly. `DATABASE_URL` or the standard `PG*` variables supply the
+connection settings; credentials are never stored in `alembic.ini`.
+
+For a **new, empty database**, run `alembic upgrade head` before starting the
+API with `TASK_STORAGE=postgres`. The Compose service no longer runs the old
+`sql/schema.sql` initialization script for new volumes.
+
+For an **existing database** whose `tasks` table was created by that script,
+first compare its columns, primary key, nullability, and default with
+`migrations/versions/001_tasks_baseline.py`. Check `alembic_version` is absent
+and back up the database according to your normal procedure. Once the schema
+is confirmed equivalent, run `alembic stamp 001_tasks_baseline`. Stamping only
+records the migration version; it does not recreate or change task rows. Do not
+run `alembic upgrade head` against an unstamped database that already has the
+`tasks` table: the baseline will stop with an error. The baseline downgrade is
+disabled to protect task records.
+
+For later schema changes, create a revision with `alembic revision -m
+"description"`, review its SQL and data impact, then apply it with `alembic
+upgrade head`. `alembic current` reports the recorded version. The baseline
+contains no new task columns.
+
 ## API
 
 | Method | Path | Purpose |
@@ -51,9 +76,10 @@ curl -X POST http://127.0.0.1:8000/tasks \
   -d '{"name": "Review notes"}'
 ```
 
-Tasks have UUID identifiers. Names are trimmed, must contain 1–200 characters,
-and new tasks start with `completed: false`. PATCH requests must contain at
-least one non-null supported field.
+Tasks have UUID identifiers and an ISO 8601 `created_at` timestamp with a time
+zone. Names are trimmed, must contain 1–200 characters, and new tasks start
+with `completed: false`. PATCH requests must contain at least one non-null
+supported field; clients cannot set or change `created_at`.
 
 ## Project structure
 
