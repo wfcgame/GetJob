@@ -11,7 +11,9 @@ requires-python = ">=3.12"
 dependencies = [
     "alembic>=1.15,<2.0",
     "fastapi>=0.115,<1.0",
+    "openai>=1.0,<3.0",
     "psycopg[binary]>=3.2,<4.0",
+    "python-dotenv>=1.0,<2.0",
     "SQLAlchemy>=2.0,<3.0",
     "uvicorn[standard]>=0.32,<1.0",
 ]
@@ -25,6 +27,7 @@ test = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
+pythonpath = ["."]
 
 [tool.setuptools.packages.find]
 include = ["app*"]
