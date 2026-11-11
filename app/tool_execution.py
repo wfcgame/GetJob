@@ -10,7 +10,9 @@ def validate_tool_call(call: object) -> CreateTaskToolCall:
 
 
 def proposal_to_tool_call(proposal: TaskProposal) -> CreateTaskToolCall:
-    """Prepare a validated call without executing it or granting approval."""
+    """Convert only a task proposal; never convert a clarification or grant approval."""
+    if not isinstance(proposal, TaskProposal):
+        raise TypeError("Only TaskProposal can be converted to a tool call")
     validated = TaskProposal.model_validate(proposal.model_dump())
     return validate_tool_call(
         {"tool": validated.action, "arguments": {"name": validated.name}}
