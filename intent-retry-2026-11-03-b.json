@@ -1,0 +1,227 @@
+{
+  "summary": {
+    "total_cases": 5,
+    "scored_cases": 4,
+    "accuracy": 1.0,
+    "correct_predictions": 4,
+    "incorrect_predictions": 0,
+    "invalid_outputs": 0,
+    "invalid_reasons": {
+      "missing_output": 0,
+      "malformed_json": 0,
+      "schema_validation": 0
+    },
+    "api_failures": 0,
+    "unresolved_policy_cases": 1,
+    "usage_available": 5,
+    "reasoning_usage_available": 5,
+    "at_output_limit_count": 0,
+    "confirmed_truncations": 0,
+    "token_totals": {
+      "input_tokens": 785,
+      "output_tokens": 1192,
+      "total_tokens": 1977,
+      "reasoning_tokens": 1172
+    },
+    "categories": {
+      "explicit_task_creation": {
+        "total_cases": 0,
+        "scored_cases": 0,
+        "correct_predictions": 0,
+        "incorrect_predictions": 0,
+        "invalid_outputs": 0,
+        "api_failures": 0,
+        "unresolved_policy_cases": 0,
+        "accuracy": null
+      },
+      "direct_assistance": {
+        "total_cases": 3,
+        "scored_cases": 2,
+        "correct_predictions": 2,
+        "incorrect_predictions": 0,
+        "invalid_outputs": 0,
+        "api_failures": 0,
+        "unresolved_policy_cases": 1,
+        "accuracy": 1.0
+      },
+      "missing_information": {
+        "total_cases": 1,
+        "scored_cases": 1,
+        "correct_predictions": 1,
+        "incorrect_predictions": 0,
+        "invalid_outputs": 0,
+        "api_failures": 0,
+        "unresolved_policy_cases": 0,
+        "accuracy": 1.0
+      },
+      "negation": {
+        "total_cases": 1,
+        "scored_cases": 1,
+        "correct_predictions": 1,
+        "incorrect_predictions": 0,
+        "invalid_outputs": 0,
+        "api_failures": 0,
+        "unresolved_policy_cases": 0,
+        "accuracy": 1.0
+      },
+      "indirect_task_request": {
+        "total_cases": 0,
+        "scored_cases": 0,
+        "correct_predictions": 0,
+        "incorrect_predictions": 0,
+        "invalid_outputs": 0,
+        "api_failures": 0,
+        "unresolved_policy_cases": 0,
+        "accuracy": null
+      }
+    }
+  },
+  "results": [
+    {
+      "case_id": "assist-02",
+      "category": "direct_assistance",
+      "request": "Summarize my interview notes.",
+      "expected_intent": "clarify",
+      "predicted_intent": "clarify",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 152,
+        "output_tokens": 168,
+        "total_tokens": 320,
+        "reasoning_tokens": 173
+      },
+      "diagnostics": {
+        "model": "dots-studio/dots-3-note-preview:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 89,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "assist-03",
+      "category": "direct_assistance",
+      "request": "Find the deadline in my project notes.",
+      "expected_intent": "clarify",
+      "predicted_intent": "clarify",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 153,
+        "output_tokens": 134,
+        "total_tokens": 287,
+        "reasoning_tokens": 132
+      },
+      "diagnostics": {
+        "model": "dots-studio/dots-3-note-preview:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 89,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "assist-04",
+      "category": "direct_assistance",
+      "request": "Explain why this Python traceback occurs.",
+      "expected_intent": null,
+      "predicted_intent": "clarify",
+      "correct": null,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": "A direct answer needs an assistance intent or an explicit policy for mapping it to clarify.",
+      "token_usage": {
+        "input_tokens": 164,
+        "output_tokens": 179,
+        "total_tokens": 343,
+        "reasoning_tokens": 156
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 92,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "missing-04",
+      "category": "missing_information",
+      "request": "Create a task to...",
+      "expected_intent": "clarify",
+      "predicted_intent": "clarify",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 150,
+        "output_tokens": 502,
+        "total_tokens": 652,
+        "reasoning_tokens": 523
+      },
+      "diagnostics": {
+        "model": "dots-studio/dots-3-note-preview:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 71,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "negation-01",
+      "category": "negation",
+      "request": "Do not create a task; just review my notes.",
+      "expected_intent": "clarify",
+      "predicted_intent": "clarify",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 166,
+        "output_tokens": 209,
+        "total_tokens": 375,
+        "reasoning_tokens": 188
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 74,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    }
+  ],
+  "run_config": {
+    "requested_model": "openrouter/free",
+    "max_output_tokens": 1200,
+    "case_ids": [
+      "assist-02",
+      "assist-03",
+      "assist-04",
+      "missing-04",
+      "negation-01"
+    ]
+  }
+}

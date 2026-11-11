@@ -1,0 +1,177 @@
+{
+  "summary": {
+    "total_cases": 5,
+    "scored_cases": 0,
+    "accuracy": null,
+    "correct_predictions": 0,
+    "incorrect_predictions": 0,
+    "invalid_outputs": 0,
+    "invalid_reasons": {
+      "missing_output": 0,
+      "malformed_json": 0,
+      "schema_validation": 0
+    },
+    "api_failures": 5,
+    "unresolved_policy_cases": 1,
+    "usage_available": 0,
+    "reasoning_usage_available": 0,
+    "at_output_limit_count": 0,
+    "confirmed_truncations": 0,
+    "token_totals": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "total_tokens": 0,
+      "reasoning_tokens": null
+    },
+    "categories": {
+      "explicit_task_creation": {
+        "total_cases": 0,
+        "scored_cases": 0,
+        "correct_predictions": 0,
+        "incorrect_predictions": 0,
+        "invalid_outputs": 0,
+        "api_failures": 0,
+        "unresolved_policy_cases": 0,
+        "accuracy": null
+      },
+      "direct_assistance": {
+        "total_cases": 3,
+        "scored_cases": 0,
+        "correct_predictions": 0,
+        "incorrect_predictions": 0,
+        "invalid_outputs": 0,
+        "api_failures": 3,
+        "unresolved_policy_cases": 1,
+        "accuracy": null
+      },
+      "missing_information": {
+        "total_cases": 1,
+        "scored_cases": 0,
+        "correct_predictions": 0,
+        "incorrect_predictions": 0,
+        "invalid_outputs": 0,
+        "api_failures": 1,
+        "unresolved_policy_cases": 0,
+        "accuracy": null
+      },
+      "negation": {
+        "total_cases": 1,
+        "scored_cases": 0,
+        "correct_predictions": 0,
+        "incorrect_predictions": 0,
+        "invalid_outputs": 0,
+        "api_failures": 1,
+        "unresolved_policy_cases": 0,
+        "accuracy": null
+      },
+      "indirect_task_request": {
+        "total_cases": 0,
+        "scored_cases": 0,
+        "correct_predictions": 0,
+        "incorrect_predictions": 0,
+        "invalid_outputs": 0,
+        "api_failures": 0,
+        "unresolved_policy_cases": 0,
+        "accuracy": null
+      }
+    }
+  },
+  "results": [
+    {
+      "case_id": "assist-02",
+      "category": "direct_assistance",
+      "request": "Summarize my interview notes.",
+      "expected_intent": "clarify",
+      "predicted_intent": null,
+      "correct": null,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": {
+        "error_type": "APIConnectionError",
+        "status_code": null
+      },
+      "policy_note": null,
+      "token_usage": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "assist-03",
+      "category": "direct_assistance",
+      "request": "Find the deadline in my project notes.",
+      "expected_intent": "clarify",
+      "predicted_intent": null,
+      "correct": null,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": {
+        "error_type": "APIConnectionError",
+        "status_code": null
+      },
+      "policy_note": null,
+      "token_usage": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "assist-04",
+      "category": "direct_assistance",
+      "request": "Explain why this Python traceback occurs.",
+      "expected_intent": null,
+      "predicted_intent": null,
+      "correct": null,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": {
+        "error_type": "APIConnectionError",
+        "status_code": null
+      },
+      "policy_note": "A direct answer needs an assistance intent or an explicit policy for mapping it to clarify.",
+      "token_usage": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "missing-04",
+      "category": "missing_information",
+      "request": "Create a task to...",
+      "expected_intent": "clarify",
+      "predicted_intent": null,
+      "correct": null,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": {
+        "error_type": "APIConnectionError",
+        "status_code": null
+      },
+      "policy_note": null,
+      "token_usage": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "negation-01",
+      "category": "negation",
+      "request": "Do not create a task; just review my notes.",
+      "expected_intent": "clarify",
+      "predicted_intent": null,
+      "correct": null,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": {
+        "error_type": "APIConnectionError",
+        "status_code": null
+      },
+      "policy_note": null,
+      "token_usage": null,
+      "diagnostics": null
+    }
+  ],
+  "run_config": {
+    "requested_model": "openrouter/free",
+    "max_output_tokens": 1200,
+    "case_ids": [
+      "assist-02",
+      "assist-03",
+      "assist-04",
+      "missing-04",
+      "negation-01"
+    ]
+  }
+}

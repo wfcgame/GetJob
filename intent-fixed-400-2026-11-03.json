@@ -1,0 +1,695 @@
+{
+  "summary": {
+    "total_cases": 23,
+    "scored_cases": 16,
+    "accuracy": 0.8125,
+    "correct_predictions": 13,
+    "incorrect_predictions": 2,
+    "invalid_outputs": 1,
+    "invalid_reasons": {
+      "missing_output": 0,
+      "malformed_json": 1,
+      "schema_validation": 0
+    },
+    "api_failures": 4,
+    "unresolved_policy_cases": 3,
+    "usage_available": 19,
+    "reasoning_usage_available": 19,
+    "at_output_limit_count": 1,
+    "confirmed_truncations": 1,
+    "token_totals": {
+      "input_tokens": 3134,
+      "output_tokens": 4001,
+      "total_tokens": 7135,
+      "reasoning_tokens": 3647
+    },
+    "categories": {
+      "explicit_task_creation": {
+        "total_cases": 4,
+        "scored_cases": 1,
+        "correct_predictions": 1,
+        "incorrect_predictions": 0,
+        "invalid_outputs": 0,
+        "api_failures": 3,
+        "unresolved_policy_cases": 0,
+        "accuracy": 1.0
+      },
+      "direct_assistance": {
+        "total_cases": 5,
+        "scored_cases": 3,
+        "correct_predictions": 3,
+        "incorrect_predictions": 0,
+        "invalid_outputs": 0,
+        "api_failures": 1,
+        "unresolved_policy_cases": 1,
+        "accuracy": 1.0
+      },
+      "missing_information": {
+        "total_cases": 4,
+        "scored_cases": 4,
+        "correct_predictions": 1,
+        "incorrect_predictions": 2,
+        "invalid_outputs": 1,
+        "api_failures": 0,
+        "unresolved_policy_cases": 0,
+        "accuracy": 0.25
+      },
+      "negation": {
+        "total_cases": 4,
+        "scored_cases": 4,
+        "correct_predictions": 4,
+        "incorrect_predictions": 0,
+        "invalid_outputs": 0,
+        "api_failures": 0,
+        "unresolved_policy_cases": 0,
+        "accuracy": 1.0
+      },
+      "indirect_task_request": {
+        "total_cases": 6,
+        "scored_cases": 4,
+        "correct_predictions": 4,
+        "incorrect_predictions": 0,
+        "invalid_outputs": 0,
+        "api_failures": 0,
+        "unresolved_policy_cases": 2,
+        "accuracy": 1.0
+      }
+    }
+  },
+  "results": [
+    {
+      "case_id": "explicit-01",
+      "category": "explicit_task_creation",
+      "request": "Create a task to review the incident notes tomorrow.",
+      "expected_intent": "create_task",
+      "predicted_intent": "create_task",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 165,
+        "output_tokens": 133,
+        "total_tokens": 298,
+        "reasoning_tokens": 118
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 64,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "explicit-02",
+      "category": "explicit_task_creation",
+      "request": "Add a task: submit travel receipts by Friday.",
+      "expected_intent": "create_task",
+      "predicted_intent": null,
+      "correct": null,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": {
+        "error_type": "APITimeoutError",
+        "status_code": null,
+        "cause_type": "ReadTimeout"
+      },
+      "policy_note": null,
+      "token_usage": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "explicit-03",
+      "category": "explicit_task_creation",
+      "request": "Please create a task called Renew passport.",
+      "expected_intent": "create_task",
+      "predicted_intent": null,
+      "correct": null,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": {
+        "error_type": "APITimeoutError",
+        "status_code": null,
+        "cause_type": "ReadTimeout"
+      },
+      "policy_note": null,
+      "token_usage": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "explicit-04",
+      "category": "explicit_task_creation",
+      "request": "Can you add a task to call the dentist?",
+      "expected_intent": "create_task",
+      "predicted_intent": null,
+      "correct": null,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": {
+        "error_type": "APITimeoutError",
+        "status_code": null,
+        "cause_type": "ReadTimeout"
+      },
+      "policy_note": null,
+      "token_usage": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "assist-01",
+      "category": "direct_assistance",
+      "request": "Review my Python notes.",
+      "expected_intent": "clarify",
+      "predicted_intent": null,
+      "correct": null,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": {
+        "error_type": "APITimeoutError",
+        "status_code": null,
+        "cause_type": "ReadTimeout"
+      },
+      "policy_note": null,
+      "token_usage": null,
+      "diagnostics": null
+    },
+    {
+      "case_id": "assist-02",
+      "category": "direct_assistance",
+      "request": "Summarize my interview notes.",
+      "expected_intent": "clarify",
+      "predicted_intent": "clarify",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 162,
+        "output_tokens": 229,
+        "total_tokens": 391,
+        "reasoning_tokens": 210
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 82,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "assist-03",
+      "category": "direct_assistance",
+      "request": "Find the deadline in my project notes.",
+      "expected_intent": "clarify",
+      "predicted_intent": "clarify",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 163,
+        "output_tokens": 238,
+        "total_tokens": 401,
+        "reasoning_tokens": 217
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 87,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "assist-04",
+      "category": "direct_assistance",
+      "request": "Explain why this Python traceback occurs.",
+      "expected_intent": null,
+      "predicted_intent": "clarify",
+      "correct": null,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": "A direct answer needs an assistance intent or an explicit policy for mapping it to clarify.",
+      "token_usage": {
+        "input_tokens": 164,
+        "output_tokens": 247,
+        "total_tokens": 411,
+        "reasoning_tokens": 223
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 101,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "missing-01",
+      "category": "missing_information",
+      "request": "Create a task.",
+      "expected_intent": "clarify",
+      "predicted_intent": "create_task",
+      "correct": false,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 159,
+        "output_tokens": 196,
+        "total_tokens": 355,
+        "reasoning_tokens": 182
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 47,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "missing-02",
+      "category": "missing_information",
+      "request": "Make a task for the thing we discussed.",
+      "expected_intent": "clarify",
+      "predicted_intent": "create_task",
+      "correct": false,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 164,
+        "output_tokens": 331,
+        "total_tokens": 495,
+        "reasoning_tokens": 317
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 52,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "missing-03",
+      "category": "missing_information",
+      "request": "Which of these should go on my task list?",
+      "expected_intent": "clarify",
+      "predicted_intent": "clarify",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 165,
+        "output_tokens": 143,
+        "total_tokens": 308,
+        "reasoning_tokens": 118
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 100,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "missing-04",
+      "category": "missing_information",
+      "request": "Create a task to...",
+      "expected_intent": "clarify",
+      "predicted_intent": null,
+      "correct": false,
+      "invalid_output": true,
+      "invalid_reason": "malformed_json",
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 160,
+        "output_tokens": 400,
+        "total_tokens": 560,
+        "reasoning_tokens": 391
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "incomplete",
+        "incomplete_reason": "max_output_tokens",
+        "finish_reason": null,
+        "output_text_chars": 32,
+        "at_output_limit": true,
+        "truncation_confirmed": true
+      }
+    },
+    {
+      "case_id": "negation-01",
+      "category": "negation",
+      "request": "Do not create a task; just review my notes.",
+      "expected_intent": "clarify",
+      "predicted_intent": "clarify",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 166,
+        "output_tokens": 246,
+        "total_tokens": 412,
+        "reasoning_tokens": 226
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 74,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "negation-02",
+      "category": "negation",
+      "request": "Don't add a task for the interview; summarize the notes instead.",
+      "expected_intent": "clarify",
+      "predicted_intent": "clarify",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 169,
+        "output_tokens": 153,
+        "total_tokens": 322,
+        "reasoning_tokens": 133
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 77,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "negation-03",
+      "category": "negation",
+      "request": "I don't want a task created. What did we decide?",
+      "expected_intent": "clarify",
+      "predicted_intent": "clarify",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 168,
+        "output_tokens": 154,
+        "total_tokens": 322,
+        "reasoning_tokens": 132
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 89,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "negation-04",
+      "category": "negation",
+      "request": "Create a task to call Sam, but don't save it yet.",
+      "expected_intent": "create_task",
+      "predicted_intent": "create_task",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 169,
+        "output_tokens": 343,
+        "total_tokens": 512,
+        "reasoning_tokens": 330
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 42,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "indirect-01",
+      "category": "indirect_task_request",
+      "request": "Could you put send the invoice on my task list?",
+      "expected_intent": "create_task",
+      "predicted_intent": "create_task",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 166,
+        "output_tokens": 80,
+        "total_tokens": 246,
+        "reasoning_tokens": 66
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 50,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "indirect-02",
+      "category": "indirect_task_request",
+      "request": "Would it help to create a task for the launch?",
+      "expected_intent": "clarify",
+      "predicted_intent": "clarify",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 166,
+        "output_tokens": 210,
+        "total_tokens": 376,
+        "reasoning_tokens": 187
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 84,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "indirect-03",
+      "category": "indirect_task_request",
+      "request": "Please make sure I remember to renew my license.",
+      "expected_intent": null,
+      "predicted_intent": "create_task",
+      "correct": null,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": "A reminder may need a reminder intent or an explicit policy to create a task.",
+      "token_usage": {
+        "input_tokens": 165,
+        "output_tokens": 96,
+        "total_tokens": 261,
+        "reasoning_tokens": 81
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 50,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "indirect-04",
+      "category": "indirect_task_request",
+      "request": "I should probably follow up with Mia next week.",
+      "expected_intent": null,
+      "predicted_intent": "clarify",
+      "correct": null,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": "A statement of intent does not clearly authorize task creation; define a policy before labeling.",
+      "token_usage": {
+        "input_tokens": 165,
+        "output_tokens": 296,
+        "total_tokens": 461,
+        "reasoning_tokens": 269
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 101,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "assist-05",
+      "category": "direct_assistance",
+      "request": "Review the notes from yesterday's meeting.",
+      "expected_intent": "clarify",
+      "predicted_intent": "clarify",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 163,
+        "output_tokens": 241,
+        "total_tokens": 404,
+        "reasoning_tokens": 221
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 74,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "indirect-05",
+      "category": "indirect_task_request",
+      "request": "Can you make a to-do for returning the library books?",
+      "expected_intent": "create_task",
+      "predicted_intent": "create_task",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 167,
+        "output_tokens": 85,
+        "total_tokens": 252,
+        "reasoning_tokens": 71
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 54,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    },
+    {
+      "case_id": "indirect-06",
+      "category": "indirect_task_request",
+      "request": "Do you think I should track the launch checklist as a task?",
+      "expected_intent": "clarify",
+      "predicted_intent": "clarify",
+      "correct": true,
+      "invalid_output": false,
+      "invalid_reason": null,
+      "api_error": null,
+      "policy_note": null,
+      "token_usage": {
+        "input_tokens": 168,
+        "output_tokens": 180,
+        "total_tokens": 348,
+        "reasoning_tokens": 155
+      },
+      "diagnostics": {
+        "model": "nvidia/nemotron-3.5-super-vl:free",
+        "completion_status": "completed",
+        "incomplete_reason": null,
+        "finish_reason": null,
+        "output_text_chars": 99,
+        "at_output_limit": false,
+        "truncation_confirmed": false
+      }
+    }
+  ],
+  "run_config": {
+    "requested_model": "nvidia/nemotron-3.5-super-vl:free",
+    "max_output_tokens": 400,
+    "case_ids": [
+      "explicit-01",
+      "explicit-02",
+      "explicit-03",
+      "explicit-04",
+      "assist-01",
+      "assist-02",
+      "assist-03",
+      "assist-04",
+      "missing-01",
+      "missing-02",
+      "missing-03",
+      "missing-04",
+      "negation-01",
+      "negation-02",
+      "negation-03",
+      "negation-04",
+      "indirect-01",
+      "indirect-02",
+      "indirect-03",
+      "indirect-04",
+      "assist-05",
+      "indirect-05",
+      "indirect-06"
+    ]
+  }
+}
