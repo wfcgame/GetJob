@@ -305,6 +305,25 @@ boundaries in separate parsing and authorization test files. A recording fake
 repository confirms one write for a valid approved call and zero writes for
 denied or malformed calls.
 
+## Lesson 5.3: Local text embeddings
+
+`app.semantic_search.rank_candidates()` accepts an injected text encoder, embeds
+the query and candidates in one batch, then ranks candidates by the existing
+`cosine_similarity()` function. It reports each score and vector dimension.
+Offline tests use fake vectors and never import or download a model.
+
+The optional `embeddings` extra provides Sentence Transformers. The practice
+script prints help without `--run`; only `--run` loads
+`sentence-transformers/all-MiniLM-L6-v2` (384 dimensions). The first run may
+download model files, so run it only when ready:
+
+```bash
+uv run --extra embeddings python -m scripts.practice_embeddings --run
+```
+
+Use `--query "..."` and repeat `--candidate "..."` to try other texts.
+The experiment only prints local rankings; it does not write to PostgreSQL.
+
 ## Database migrations
 
 Alembic manages the PostgreSQL schema. Repository reads and writes still use
